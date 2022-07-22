@@ -9,7 +9,7 @@ Assumptions & Hypotheses:
   Some requests have been tagged as having a Location of "Toronto" or "Montreal" but their Longitude and Latitude do not agree with their location. 
   Their co-ordinates place the request somewhere in South East Asia. 
 
-- As as result of outliers, using density as a metric may not make the most sense. The radius of the circle containing all requests for each POI is not
+- As a result of outliers, using density as a metric may not make the most sense. The radius of the circle containing all requests for each POI is not
   a reliable metric, since any single outlier will greatly increase the area. This will result in a much lower value for the density.
 
 - Without knowing what the POIs are or what they represent, it is difficult to determine if the mean and std. deviation make sense. POIs could be anything,
@@ -31,7 +31,7 @@ Conclusion:
 
 It is difficult to ensure that the analysis was performed correctly. This is a problem that data scientists & software developers probably face all the time. 
 How do we know that our results are accurate when we are performing the analysis on very large datasets? My approach to solve this was to test on smaller subsets, 
-for which the results were easily manually calculatable and ensure that each individual function and piece of my solution was performing correctly.
+for which the results were easily manually calculable and ensure that each individual function and piece of my solution was performing correctly.
 This approach was fine for me in this project since the POI data & request data provided were both relatively small but it 
 does not seem to be a scalable, long term solution to verifying that solutions are functioning correctly.
 
@@ -43,7 +43,7 @@ However, many other questions remain regarding more advanced metrics.
 The distance between two given POIs could be a contributing factor, for example. 
 If two POIs are very close together, requests could be being made for either one and it would not be possible to distinguish them.
 
-Other problems involving scalability were also discovered. One challenge faced occurred when writing the solution for the mapping of request to nearest POI.
+Other problems involving scalability were also discovered. One challenge that I faced occurred when writing the solution for the mapping of request to nearest POI.
 Determining the nearest POI for each request seems to require a full iteration through the POI dataframe for each request, meaning a nested iteration.
 In order to accomplish this, I collected the data from the POI dataframe as a python list. Given the specific data and files, it was easy to see that this
 was no doubt the optimal solution in this case - it makes the code simpler to both write and follow, and is very quick. In reality, the volume and dimension
