@@ -29,7 +29,3 @@ Depending on the job/role you are applying for, you may be asked to choose one o
 
 1. To visualize the popularity of each *POI*, map them to a scale that ranges from -10 to 10. Please provide a mathematical model to implement this, considering extreme cases and outliers. Aim to be more sensitive around the average and give as much visual differentiability as possible.
 2. **Bonus**: Try to develop reasonable hypotheses regarding *POIs*, state all assumptions, testing steps, and conclusions. Include this as a text file (with the name `bonus`) in your final submission.
-
-### Notes
-
-Keep in mind that both the amount and the dimension of the data we work with are much higher, in reality, so try to demonstrate that your solutions can handle beyond the sample scale.
