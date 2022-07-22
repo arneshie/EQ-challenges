@@ -1,0 +1,52 @@
+Assumptions & Hypotheses: 
+
+- POIs are unique. In the given dataset, there was an identical entry for two POIs. This data was cleaned under the assumption that this was a mistake.
+  Two POIs at the exact same location makes it impossible for a single "closest POI" to exist, and therefore assigning it to a request would also not be
+  possible.
+
+- At first, I was under the assumption that there was an error in my code due to the high variance and large outliers in the requests data.
+  Upon further inspection of the data by debugging and outputting different filters of the dataframes, it was discovered that there were mistakes.
+  Some requests have been tagged as having a Location of "Toronto" or "Montreal" but their Longitude and Latitude do not agree with their location. 
+  Their co-ordinates place the request somewhere in South East Asia. 
+
+- As as result of outliers, using density as a metric may not make the most sense. The radius of the circle containing all requests for each POI is not
+  a reliable metric, since any single outlier will greatly increase the area. This will result in a much lower value for the density.
+
+- Without knowing what the POIs are or what they represent, it is difficult to determine if the mean and std. deviation make sense. POIs could be anything,
+  from hospitals to cafes and it is hard to determine how important they are. One would definitely expect a pattern of increased density, visits, and
+  decreased average distance for a very important place like a hospital but perhaps not for something like a cafe. 
+
+
+Testing Steps:
+
+- To check if the results retrieved were accurate or feasible, simple debugging steps and manual verification was performed. This included printouts of
+  data frames, filtering for certain outliers, and manual verification of certain locations. 
+
+- The values for the standard deviation were very large relative to the mean, so to be certain, standard deviation was manually calculated on multiple small
+  subsets of the requests for each POI. This appears to be a characteristic of the data rather than a mistake in calculation, as a result of relatively
+  rigorous testing on a simple calculation.
+
+
+Conclusion:
+
+It is difficult to ensure that the analysis was performed correctly. This is a problem that data scientists & software developers probably face all the time. 
+How do we know that our results are accurate when we are performing the analysis on very large datasets? My approach to solve this was to test on smaller subsets, 
+for which the results were easily manually calculatable and ensure that each individual function and piece of my solution was performing correctly.
+This approach was fine for me in this project since the POI data & request data provided were both relatively small but it 
+does not seem to be a scalable, long term solution to verifying that solutions are functioning correctly.
+
+Without knowing the context of the data, it was also difficult to come up with an accurate measure or ranking. The variance in the data also was not accounted
+for or cleaned up which means results will no doubt be skewed. What can be certain though is that a higher density of requests and smaller mean distance
+between requests most likely indicates a higher importance for a POI, which is factored in my solution. 
+Since requests are more concentrated around that point, it is a good indicator of importance. 
+However, many other questions remain regarding more advanced metrics. 
+The distance between two given POIs could be a contributing factor, for example. 
+If two POIs are very close together, requests could be being made for either one and it would not be possible to distinguish them.
+
+Other problems involving scalability were also discovered. One challenge faced occurred when writing the solution for the mapping of request to nearest POI.
+Determining the nearest POI for each request seems to require a full iteration through the POI dataframe for each request, meaning a nested iteration.
+In order to accomplish this, I collected the data from the POI dataframe as a python list. Given the specific data and files, it was easy to see that this
+was no doubt the optimal solution in this case - it makes the code simpler to both write and follow, and is very quick. In reality, the volume and dimension
+of the data that would actually be handled would most certainly be much larger. That means that this solution would probably not hold up - collecting a list
+from a dataframe can result in very poor, inefficient performance and in some cases even cause the application to crash. A better solution would probably be
+needed for the long term.
